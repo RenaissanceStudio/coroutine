@@ -7,10 +7,11 @@
 #include <stdint.h>
 
 #if __APPLE__ && __MACH__
-	#include <sys/ucontext.h>
-#else 
-	#include <ucontext.h>
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    #define _XOPEN_SOURCE 700 // ucontext is not available without _XOPEN_SOURCE
 #endif 
+
+#include <ucontext.h>
 
 #define STACK_SIZE (1024*1024)
 #define DEFAULT_COROUTINE 16
